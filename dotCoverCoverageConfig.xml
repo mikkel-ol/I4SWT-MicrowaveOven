@@ -20,7 +20,11 @@
         <ClassMask>Microwave.Test.Unit.*</ClassMask>
         <FunctionMask>*</FunctionMask>
       </FilterEntry>
-    </ExcludeFilters>
+      <FilterEntry>
+        <ModuleMask>nunit.framework</ModuleMask>
+        <ClassMask>*</ClassMask>
+        <FunctionMask>*</FunctionMask>
+      </FilterEntry>    </ExcludeFilters>
   </Filters>
   <!-- Coverage filters. It's possible to use asterisks as wildcard symbols.
     <IncludeFilters>
