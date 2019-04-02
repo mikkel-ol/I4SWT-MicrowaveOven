@@ -6,4 +6,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Microwave.Core\Microwave.Core.csproj" />
   </ItemGroup>
+
+  <IsTestProject>false</IsTestProject>
 </Project>

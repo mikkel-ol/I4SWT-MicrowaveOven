@@ -4,4 +4,5 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <IsTestProject>false</IsTestProject>
 </Project>
