@@ -9,7 +9,7 @@
 
   <ItemGroup>
   <DotNetCliToolReference Include="JetBrains.dotCover.CommandLineTools" 
-    Version="2018.2.0" />
+    Version="2019.1.0-eap04" />
 
 
     <PackageReference Include="nsubstitute" Version="4.0.0" />
