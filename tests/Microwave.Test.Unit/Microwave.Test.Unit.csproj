@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+  <DotNetCliToolReference Include="JetBrains.dotCover.CommandLineTools" 
+    Version="2018.2.0-eap03" />
+
     <PackageReference Include="nsubstitute" Version="4.0.0" />
     <PackageReference Include="nunit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
