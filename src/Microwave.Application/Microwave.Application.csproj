@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    
+    <IsTestProject>false</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Microwave.Core\Microwave.Core.csproj" />
   </ItemGroup>
 
-  <IsTestProject>false</IsTestProject>
 </Project>
