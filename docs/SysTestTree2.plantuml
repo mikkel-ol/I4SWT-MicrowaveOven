@@ -1,0 +1,57 @@
+@startuml
+
+'Testing colors:
+skinparam card{
+    backgroundColor<<already tested>> lawngreen
+    backgroundColor<<sut>> salmon
+    'backgroundColor<<tested>> gold
+}
+
+header SWT group 8
+title system test
+
+frame Application{
+    card program
+}
+
+frame Core{
+    card UserInterface<<sut>>
+    card CookController<<sut>>
+
+    card Door<<already tested>>
+    card Light<<already tested>>
+    card Timer<<already tested>>
+    card PowerTube<<already tested>>
+    card Display<<already tested>>
+    card Output<<already tested>>
+}
+
+'Relations projects
+' 0. to 1.
+Application -- Core
+
+'Relations CookController:
+'1.
+CookController - UserInterface
+'1. to 2.
+CookController -- Door
+CookController -- Timer
+CookController -- PowerTube
+CookController -- Display
+
+'Relations UserInterface:
+'1.
+UserInterface - CookController
+'1. to 2.
+UserInterface -- Light
+UserInterface -- Door
+UserInterface -- Display
+
+' Relations 2. to 3.
+Light -- Output
+Display -- Output
+PowerTube -- Output
+
+
+
+@enduml
