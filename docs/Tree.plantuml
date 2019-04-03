@@ -1,0 +1,20 @@
+
+@startuml
+
+card program        
+
+card Door
+card Light
+card Timer
+card Output 
+card PowerTube
+card Display
+
+card UserInterface
+card CookController
+
+'Relations:
+'program --> controller
+
+
+@enduml

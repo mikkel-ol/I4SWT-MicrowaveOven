@@ -1,0 +1,41 @@
+@startuml
+
+frame application{
+    card program
+}
+
+frame Core{
+    
+    frame interface{
+        card IDoor
+        card ILight
+        card ITimer
+        card IOutput 
+        card IPowerTube
+        card IDisplay
+        
+        card IUserInterface
+        card ICookController
+    }
+
+    frame boundary{
+        card Door
+        card Light
+        card Timer
+        card Output 
+        card PowerTube
+        card Display
+    }
+
+    frame controller{
+        card UserInterface
+        card CookController
+    }
+}
+
+'Relations:
+
+application --> Core
+
+
+@enduml
