@@ -1,9 +1,9 @@
 using System;
 using NUnit.Framework;
+using NSubstitute;
 using Microwave.Core.Boundary;
 using Microwave.Core.Interfaces;
-using NSubstitute;
-
+using Microwave.Core.Controllers;
 
 namespace Tests
 {
