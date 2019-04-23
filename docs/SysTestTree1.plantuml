@@ -44,11 +44,14 @@ CookController -- Display
 'Relations UserInterface:
 '1.
 UserInterface - CookController
+Button - UserInterface 
+UserInterface - Button
+
 '1. to 2.
 UserInterface -- Light
 UserInterface -- Door
 UserInterface -- Display
-UserInterface -- Button
+
 
 ' Relations 2. to 3.
 Light -- Output
