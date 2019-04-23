@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using NUnit.Framework;
 using Microwave.Core.Boundary;
 using Microwave.Core.Interfaces;
@@ -19,7 +20,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            _output = new Output();
+            _output = Substitute.For<Output>();
             _sutDisplay = new Display(_output);
             _sutLight = new Light(_output);
             _sutPowerTube = new PowerTube(_output);
@@ -29,17 +30,42 @@ namespace Tests
 
         // Sut: Display
         // Dep: Output
-        [TestCase(TestName ="DisplaySut")]
-        [TestCase(TestName ="Should")]
-        public void DisplaySut()
+        [TestCase(TestName ="ShouldOutputTime")]
+        public void DisplayTimeSut(int power)
         {
-            // Søren 
+            // Søren
+            // Testing the only dependency: Output
 
+            _sutDisplay.ShowPower(power);
+            //_sutDisplay.ShowTime(power, power);
+
+
+            _sutDisplay.ShowTime(0, 0);
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
 
 
 
             Assert.Pass();
         }
+        [TestCase(TestName = "ShouldOutputPower")]
+        public void DisplayPowerSut(int power)
+        {
+            // Søren
+            // Testing the only dependency: Output
+
+            _sutDisplay.ShowPower(power);
+            //_sutDisplay.ShowTime(power, power);
+
+
+            _sutDisplay.ShowTime(0, 0);
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
+
+
+
+            Assert.Pass();
+        }
+
+
 
         // Sut: Light 
         // Dep: output
