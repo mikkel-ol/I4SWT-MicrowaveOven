@@ -9,7 +9,7 @@ namespace Tests
     public class It01Sut
     {
 
-        private IOutput _output;
+        private Output _output;
         private Display _sutDisplay;
         private Light _sutLight;
         private PowerTube _sutPowerTube;
@@ -19,7 +19,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            _output = Substitute.For<IOutput>();
+            _output = new Output();
             _sutDisplay = new Display(_output);
             _sutLight = new Light(_output);
             _sutPowerTube = new PowerTube(_output);
@@ -33,7 +33,7 @@ namespace Tests
         [TestCase(TestName ="Should")]
         public void DisplaySut()
         {
-            
+            // Søren 
 
 
 
