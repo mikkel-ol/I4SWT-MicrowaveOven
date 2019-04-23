@@ -31,16 +31,11 @@ namespace Tests
         // Sut: Display
         // Dep: Output
         [TestCase(TestName ="ShouldOutputTime")]
-        public void DisplayTimeSut(int power)
+        public void DisplayTimeSut(int min, int sec)
         {
             // Søren
             // Testing the only dependency: Output
-
-            _sutDisplay.ShowPower(power);
-            //_sutDisplay.ShowTime(power, power);
-
-
-            _sutDisplay.ShowTime(0, 0);
+            _sutDisplay.ShowTime(min, sec);
             _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
 
 

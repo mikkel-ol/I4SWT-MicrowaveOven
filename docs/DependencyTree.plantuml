@@ -24,6 +24,7 @@ frame Core{
     card PowerTube
     card Display
     card Output
+    card Button
 }
 
 'Relations projects
@@ -46,6 +47,7 @@ UserInterface - CookController
 UserInterface -- Light
 UserInterface -- Door
 UserInterface -- Display
+UserInterface -- Button
 
 ' Relations 2. to 3.
 Light -- Output

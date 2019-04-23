@@ -4,7 +4,8 @@
 skinparam card{
     backgroundColor<<tested>> lawngreen
     backgroundColor<<sut>> salmon
-    'backgroundColor<<tested>> gold
+    backgroundColor<<test>> salmon
+    backgroundColor<<fake>> gold
 }
 
 header SWT group 8
@@ -15,7 +16,7 @@ frame Application{
 }
 
 frame Core{
-    card UserInterface<<sut>>
+    card UserInterface<<tested>>
     card CookController<<tested>>
 
     card Door<<tested>>
@@ -23,7 +24,8 @@ frame Core{
     card Timer<<tested>>
     card PowerTube<<tested>>
     card Display<<tested>>
-    card Output<<tested>>
+    card Output<<fake>>
+    card Button<<tested>>
 }
 
 'Relations projects
@@ -46,6 +48,7 @@ UserInterface - CookController
 UserInterface -- Light
 UserInterface -- Door
 UserInterface -- Display
+UserInterface -- Button
 
 ' Relations 2. to 3.
 Light -- Output
