@@ -10,14 +10,16 @@ namespace Tests
 {
     public class It01Sut
     {
-
+        private CookController _fakeCC;
         private Output _fakeOutput;
-        private Button _fakeButton;
+        private Button _fakePBtn;
+        private Button _fakeTBtn;
+        private Button _fakeSCBtn;
 
         private Display _sutDisplay;
         private Light _sutLight;
         private PowerTube _sutPowerTube;
-
+        private Door _sutDoor;
         private UserInterface _sutUI;
 
         // System under test
@@ -25,14 +27,21 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
+            _fakeCC = Substitute.For<CookController>();
             _fakeOutput = Substitute.For<Output>();
-            _fakeButton = Substitute.For<Button>();
+            _fakePBtn = Substitute.For<Button>();
+            _fakeTBtn = Substitute.For<Button>();
+            _fakeSCBtn = Substitute.For<Button>();
+
+
 
             _sutDisplay = new Display(_fakeOutput);
             _sutLight = new Light(_fakeOutput);
             _sutPowerTube = new PowerTube(_fakeOutput);
 
-            
+            _sutUI = new UserInterface(_fakePBtn, _fakeTBtn, _fakeSCBtn, _sutDoor, _sutDisplay, _sutLight, _fakeCC);
+
+
         }
 
 
