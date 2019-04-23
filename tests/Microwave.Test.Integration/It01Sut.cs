@@ -12,11 +12,26 @@ namespace Tests
         }
 
 
+        // Sut: Display
+        // Dep: Output
+        [TestCase(TestName ="DisplaySut")]
+        public void DisplaySut()
+        {
+            Assert.Pass();
+        }
 
+        // Sut: Light 
+        // Dep: output
+        [TestCase(TestName ="LightSut")]
+        public void LightSut()
+        {
+            Assert.Pass();
+        }
 
-
-        [Test]
-        public void Test1()
+        // Sut: PowerTube
+        // Dep: Output
+        [TestCase(TestName = "PowerTubeSut")]
+        public void PowerTubeSut()
         {
             Assert.Pass();
         }
