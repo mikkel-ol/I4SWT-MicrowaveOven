@@ -2,13 +2,13 @@
 
 'Testing colors:
 skinparam card{
-    backgroundColor<<already tested>> lawngreen
+    backgroundColor<<tested>> lawngreen
     backgroundColor<<sut>> salmon
     'backgroundColor<<tested>> gold
 }
 
 header SWT group 8
-title system test
+title It01 Sut
 
 frame Application{
     card program
@@ -18,12 +18,12 @@ frame Core{
     card UserInterface
     card CookController 
 
-    card Door<<already tested>>
+    card Door<<tested>>
     card Light<<sut>>
-    card Timer<<already tested>>
+    card Timer<<tested>>
     card PowerTube<<sut>>
     card Display<<sut>>
-    card Output<<already tested>>
+    card Output<<tested>>
 }
 
 'Relations projects
