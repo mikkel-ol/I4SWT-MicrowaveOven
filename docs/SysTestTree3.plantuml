@@ -25,7 +25,7 @@ frame Core{
     card PowerTube<<tested>>
     card Display<<tested>>
     card Output<<fake>>
-    card Button<<tested>>
+    card Button<<sut>>
 }
 
 'Relations projects
