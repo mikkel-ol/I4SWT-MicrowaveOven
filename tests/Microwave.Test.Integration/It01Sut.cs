@@ -22,6 +22,10 @@ namespace Tests
         private Door _sutDoor;
         private UserInterface _sutUI;
 
+        private int _powerLevel;
+        private int _time;
+
+
         // System under test
         // Iteration 01
         [SetUp]
@@ -41,27 +45,23 @@ namespace Tests
 
             _sutUI = new UserInterface(_fakePBtn, _fakeTBtn, _fakeSCBtn, _sutDoor, _sutDisplay, _sutLight, _fakeCC);
 
-
+            _powerLevel = 50;
+            _time = 1;
         }
 
 
         // Sut: Display
         // Dep: Output
-        [TestCase(TestName ="ShouldOutputTime")]
-        public void UIDisplaySut(int min, int sec)
+        [TestCase(TestName = "ShouldOutputPower")]
+        public void UIDisplaySut()
         {
             // Søren
-            _sutDisplay.ShowTime(min, sec);
-            _fakeOutput.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
-        }
-
-        [TestCase(TestName = "ShouldOutputPower")]
-        public void DisplayPowerSut(int power)
-        {
-            // Postpone this test - Søren
-            _sutDisplay.ShowPower(power);
-            //_sutDisplay.ShowTime(power, power);
-            Assert.Pass();
+            // Using fake
+            _fakePBtn.Press();
+            // 
+            //_sutDisplay.ShowTime(min, sec);
+            //_sutUI.OnPowerPressed()
+            _fakeOutput.Received().OutputLine(Arg.Is<string>(str => str.Contains($"{_powerLevel}")));
         }
 
 
