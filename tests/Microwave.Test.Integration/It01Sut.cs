@@ -15,8 +15,14 @@ namespace Tests
         // Sut: Display
         // Dep: Output
         [TestCase(TestName ="DisplaySut")]
+        [TestCase(TestName ="Should")]
         public void DisplaySut()
         {
+            
+
+
+
+
             Assert.Pass();
         }
 
