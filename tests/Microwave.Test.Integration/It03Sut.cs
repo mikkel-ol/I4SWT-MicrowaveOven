@@ -4,7 +4,7 @@ namespace Tests
 {
     // System under test
     // Iteration 01
-    public class Tests
+    public class It03Sut
     {
         [SetUp]
         public void Setup()

@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Tests
 {
-    public class Tests
+    public class It01Sut
     {
         // System under test
         // Iteration 01
