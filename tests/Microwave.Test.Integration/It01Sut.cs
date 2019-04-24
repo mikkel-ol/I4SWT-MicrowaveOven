@@ -27,8 +27,8 @@ namespace Tests
         public void Setup()
         {
             _fakeCC = Substitute.For<ICookController>();
-            _fakeDisplay = new Display(_fakeDisplay);
-            _fakeLight = new Light(_fakeLight);
+            _fakeDisplay = Substitute.For<IDisplay>();
+            _fakeLight = Substitute.For<ILight>();
 
             _PBtn = new Button();
             _TBtn = new Button();
@@ -41,26 +41,8 @@ namespace Tests
 
         // Sut: Door
         // Dep: Output
-        [TestCase(TestName = "ShouldOutputPower")]
+        [TestCase(TestName = "ShouldOpenDoor")]
         public void UIDisplaySut()
-        {
-            Assert.Pass();
-        }
-
-
-
-        // Sut: Light 
-        // Dep: output
-        [TestCase(TestName ="LightSut")]
-        public void LightSut()
-        {
-            Assert.Pass();
-        }
-
-        // Sut: PowerTube
-        // Dep: Output
-        [TestCase(TestName = "PowerTubeSut")]
-        public void PowerTubeSut()
         {
             Assert.Pass();
         }
