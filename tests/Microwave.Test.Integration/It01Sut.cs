@@ -15,18 +15,11 @@ namespace Tests
         private ILight _fakeLight;
 
         private Button _PBtn;
-        private Button TBtn;
+        private Button _TBtn;
         private Button _SCBtn;
         private Door _Door;
 
         private UserInterface _sutUI;
-
-
-
-
-        private int _powerLevel;
-        private int _time;
-
 
         // System under test
         // Iteration 01
@@ -34,21 +27,15 @@ namespace Tests
         public void Setup()
         {
             _fakeCC = Substitute.For<ICookController>();
-            _fakeOutput = Substitute.For<IOutput>();
-            _fakePBtn = Substitute.For<IButton>();
-            _fakeTBtn = Substitute.For<IButton>();
-            _fakeSCBtn = Substitute.For<IButton>();
+            _fakeDisplay = new Display(_fakeDisplay);
+            _fakeLight = new Light(_fakeLight);
 
+            _PBtn = new Button();
+            _TBtn = new Button();
+            _SCBtn = new Button();
+            _Door = new Door();
 
-
-            _sutDisplay = new Display(_fakeOutput);
-            _sutLight = new Light(_fakeOutput);
-            _sutPowerTube = new PowerTube(_fakeOutput);
-
-            _sutUI = new UserInterface(_fakePBtn, _fakeTBtn, _fakeSCBtn, _sutDoor, _sutDisplay, _sutLight, _fakeCC);
-
-            _powerLevel = 50;
-            _time = 1;
+            _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
         }
 
 
