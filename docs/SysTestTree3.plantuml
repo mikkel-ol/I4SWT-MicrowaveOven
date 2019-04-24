@@ -56,15 +56,15 @@ UserInterface -- CookController
 Door - CookController
 
 
-CookController -- PowerTube
+CookController -[thickness=2]- PowerTube
 
 '1. to 2.
-UserInterface -- Display
+UserInterface -[thickness=2]- Display
 UserInterface -- Light
-CookController -- Display
+CookController -[thickness=2]- Display
 
-CookController -- Timer
-CookController -- Timer 
+CookController -[thickness=2]- Timer
+CookController -[thickness=2]- Timer 
 
 
 ' Relations 2. to 3.
