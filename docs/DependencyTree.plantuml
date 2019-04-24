@@ -2,54 +2,70 @@
 
 'Testing colors:
 skinparam card{
-    backgroundColor<<sut>> lawngreen
-    backgroundColor<<nut>> salmon
-    backgroundColor<<tested>> gold
+    backgroundColor<<tested>> lawngreen
+    backgroundColor<<sut>> salmon
+    backgroundColor<<test>> salmon
+    backgroundColor<<fake>> gold
 }
 
 header SWT group 8
-title template
+title It01 Sut
 
 frame Application{
     card program
 }
 
 frame Core{
-    card UserInterface
-    card CookController 
-
+'0.
     card Door
+    card Button
+
+'1.
+    card UserInterface
+
+'2.
+    card CookController
     card Light
+
+'3.
     card Timer
     card PowerTube
     card Display
+
+'4 
     card Output
-    card Button
+
+
 }
+Application -- Core
 
 'Relations projects
 ' 0. to 1.
-Application -- Core
+Door -- UserInterface
+Door -- UserInterface
+
+Button -- UserInterface
+Button -- UserInterface
+
 
 'Relations CookController:
 '1.
-CookController - UserInterface
+UserInterface -- CookController
+UserInterface -- CookController
 '1. to 2.
-CookController -- Door
-CookController -- Timer
+Door - CookController
+
+
 CookController -- PowerTube
+
+'1. to 2.
+UserInterface -- Display
+UserInterface -- Light
 CookController -- Display
 
-'Relations UserInterface:
-'1.
-UserInterface - CookController
-Button - UserInterface 
-UserInterface - Button
+CookController -- Timer
+CookController -- Timer 
 
-'1. to 2.
-UserInterface -- Light
-UserInterface -- Door
-UserInterface -- Display
 
 ' Relations 2. to 3.
 Light -- Output

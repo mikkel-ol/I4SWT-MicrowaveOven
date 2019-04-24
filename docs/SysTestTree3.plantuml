@@ -16,16 +16,26 @@ frame Application{
 }
 
 frame Core{
-    card UserInterface
-    card CookController
+'0.
+    card Door<<tested>>
+    card Button<<tested>>
 
-    card Door
-    card Light
-    card Timer
-    card PowerTube
-    card Display
+'1.
+    card UserInterface<<tested>>
+
+'2.
+    card CookController<<tested>>
+    card Light<<tested>>
+
+'3.
+    card Timer<<sut>>
+    card PowerTube<<sut>>
+    card Display<<sut>>
+
+'4 
     card Output
-    card Button
+
+
 }
 Application -- Core
 
@@ -40,12 +50,11 @@ Button -- UserInterface
 
 'Relations CookController:
 '1.
-CookController - UserInterface
+UserInterface -- CookController
+UserInterface -- CookController
 '1. to 2.
 Door - CookController
 
-Timer -- CookController
-Timer -- CookController
 
 CookController -- PowerTube
 
@@ -53,6 +62,9 @@ CookController -- PowerTube
 UserInterface -- Display
 UserInterface -- Light
 CookController -- Display
+
+CookController -- Timer
+CookController -- Timer 
 
 
 ' Relations 2. to 3.
