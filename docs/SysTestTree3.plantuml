@@ -9,48 +9,51 @@ skinparam card{
 }
 
 header SWT group 8
-title It03 Sut
+title It01 Sut
 
 frame Application{
     card program
 }
 
 frame Core{
-    card UserInterface<<tested>>
-    card CookController<<tested>>
+    card UserInterface
+    card CookController
 
-    card Door<<tested>>
-    card Light<<tested>>
-    card Timer<<tested>>
-    card PowerTube<<tested>>
-    card Display<<tested>>
-    card Output<<fake>>
-    card Button<<sut>>
+    card Door
+    card Light
+    card Timer
+    card PowerTube
+    card Display
+    card Output
+    card Button
 }
+Application -- Core
 
 'Relations projects
 ' 0. to 1.
-Application -- Core
+Door -- UserInterface
+Door -- UserInterface
+
+Button -- UserInterface
+Button -- UserInterface
+
 
 'Relations CookController:
 '1.
 CookController - UserInterface
 '1. to 2.
-CookController -- Door
-CookController -- Timer
-CookController -- PowerTube
-CookController -- Display
+Door - CookController
 
-'Relations UserInterface:
-'1.
-UserInterface - CookController
-Button - UserInterface 
-UserInterface - Button
+Timer -- CookController
+Timer -- CookController
+
+CookController -- PowerTube
 
 '1. to 2.
-UserInterface -- Light
-UserInterface -- Door
 UserInterface -- Display
+UserInterface -- Light
+CookController -- Display
+
 
 ' Relations 2. to 3.
 Light -- Output
