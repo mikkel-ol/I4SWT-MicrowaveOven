@@ -39,7 +39,7 @@ namespace Tests
         }
 
 
-        // Sut: Display
+        // Sut: Door
         // Dep: Output
         [TestCase(TestName = "ShouldOutputPower")]
         public void UIDisplaySut()
