@@ -21,10 +21,10 @@ frame Core{
 
     card Door<<test>>
     card Light<<test>>
-    card Timer
-    card PowerTube
-    card Display<<test>>
-    card Output<<fake>>
+    card Timer<<fake>>
+    card PowerTube<<fake>>
+    card Display
+    card Output
     card Button<<fake>>
 }
 
