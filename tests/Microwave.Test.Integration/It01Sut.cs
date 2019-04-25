@@ -5,6 +5,8 @@ using Microwave.Core.Boundary;
 using Microwave.Core.Interfaces;
 using NSubstitute;
 using Microwave.Core.Controllers;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -20,6 +22,8 @@ namespace Tests
         private Door _Door;
 
         private UserInterface _sutUI;
+
+        private List<string> _receivedData;
 
         // System under test
         // Iteration 01
@@ -41,10 +45,19 @@ namespace Tests
 
         // Sut: Door
         // Dep: Output
-        [TestCase(TestName = "ShouldOpenDoor")]
+        [TestCase(TestName = "OpenDoor ShouldCallOnDoorOpened")]
         public void UIDisplaySut()
         {
-            Assert.Pass();
+
+            //int count = 0;
+
+            _Door.Open();
+
+            //_sutUI.OnDoorOpened += (sender, e) => { }
+            
+
+            //_Door.Open();
+            //Assert.That(_Door.Opened[0], Is.EqualTo());
         }
     }
 }
