@@ -48,14 +48,11 @@ namespace Tests
         [TestCase(TestName = "OpenDoor ShouldCallOnDoorOpened")]
         public void UIDisplaySut()
         {
-
             //int count = 0;
 
             _Door.Open();
 
             //_sutUI.OnDoorOpened += (sender, e) => { }
-            
-
             //_Door.Open();
             //Assert.That(_Door.Opened[0], Is.EqualTo());
         }
