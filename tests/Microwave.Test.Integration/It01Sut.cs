@@ -52,9 +52,9 @@ namespace Tests
             var wasCalledCount = 0;
             _Door.Opened += (o, e) => wasCalledCount = ++wasCalledCount; 
 
-            _Door.Open();
+            _Door.Open();   // 1
 
-            _fakeLight.Received(1).TurnOn();
+            _fakeLight.Received(1).TurnOn();                // 1
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
 
@@ -135,11 +135,11 @@ namespace Tests
             _Door.Opened += (o, e) => wasCalledCount = ++wasCalledCount;
             _Door.Closed += (o, e) => wasCalledCount = ++wasCalledCount;
 
-            _Door.Open();
-            _Door.Close();
+            _Door.Open();   // 1
+            _Door.Close();  // 2
 
-            _fakeLight.Received(1).TurnOn();
-            _fakeLight.Received(1).TurnOff();
+            _fakeLight.Received(1).TurnOn();                // 1
+            _fakeLight.Received(1).TurnOff();               // 2
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
 
