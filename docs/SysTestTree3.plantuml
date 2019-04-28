@@ -8,11 +8,7 @@ skinparam card{
     backgroundColor<<fake>> gold
 }
 
-frame Application{
-    card program
-}
 
-frame Core{
 '0.
     card Door<<tested>>
     card Button<<tested>>
@@ -31,10 +27,6 @@ frame Core{
 
 '4 
     card Output
-
-
-}
-Application -- Core
 
 'Relations projects
 ' 0. to 1.
