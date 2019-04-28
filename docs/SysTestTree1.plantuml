@@ -1,4 +1,4 @@
-@startuml
+@startuml IT01-Sut
 
 'Testing colors:
 skinparam card{
@@ -7,9 +7,6 @@ skinparam card{
     backgroundColor<<test>> salmon
     backgroundColor<<fake>> gold
 }
-
-header SWT group 8
-title It01 Sut
 
 frame Application{
     card program
