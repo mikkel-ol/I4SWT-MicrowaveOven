@@ -143,9 +143,6 @@ namespace Tests
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
 
-        // Door Tets:
-        // Further Cases:
-
 
         // ButtonTests:
         // related to sut
@@ -170,6 +167,8 @@ namespace Tests
 //             _fakeLight.Received(1).TurnOn();                                    // 4
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
+
+
         [TestCase(2,100, TestName = "Powerbuttom Increment ShouldResultInPowerLevel(100)")]
         [TestCase(14, 700, TestName = "Powerbuttom Increment ShouldResultInPowerLevel(700)")]
         [TestCase(15, 50, TestName = "Powerbuttom Increment ShouldOverflow ToPowerLevel(50)")]
@@ -187,9 +186,8 @@ namespace Tests
         }
 
 
-        [TestCase(1, 1, TestName = "Timebuttom Increment ShouldResultInTimeMin(100)")]
-        [TestCase(13, 13, TestName = "Timebuttom Increment ShouldResultInTimeMin(13)")]
-        [TestCase(int.MaxValue, int.MaxValue, TestName = "Timebuttom Increment ShouldResultInTimeMin(100)")]
+        [TestCase(1, 1, TestName = "Timebuttom Increment ShouldResultInTimeMin(1)")]
+        [TestCase(61, 61, TestName = "Timebuttom Increment ShouldResultInTimeMin(13)")]
         public void TestBtnTimeLoop(int loop, int resultMin)
         {
             _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
@@ -201,6 +199,68 @@ namespace Tests
 
             // Asserts that ShowTime is called with : userInterface.time
             _fakeDisplay.ShowTime(Arg.Is<int>(resultMin), Arg.Is<int>(0));  // 1
+        }
+
+        
+        // StartCancelButtom Cancel Only
+        [TestCase(TestName = "StartCancelButtom OnPowerOn ShouldTurnOff")]
+        public void TestBtnCancel()
+        {
+            _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
+
+            _PBtn.Press();  // 1
+            _SCBtn.Press(); // 3
+
+            _fakeLight.Received(1).TurnOff();
+            _fakeDisplay.Received(1).Clear();
+        }
+
+        
+        // StartCancelButtom
+        [TestCase(TestName = "StartCancelButtom CookingAndCancel ShouldStopCooking")]
+        public void TestBtnStartCancel()
+        {
+            _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
+
+            _PBtn.Press();  
+            for (int i = 0; i < 10; ++i)
+            {
+                _TBtn.Press(); 
+            }
+            _SCBtn.Press(); // 1
+            System.Threading.Thread.Sleep(1000);
+            _SCBtn.Press(); // 2
+
+            _fakeDisplay.Received(2).Clear();               // 1 , 2
+            _fakeLight.Received(1).TurnOn();                // 1
+            _fakeCC.Received(1).StartCooking(50, 10 * 60);  // 1
+
+            _fakeCC.Received(1).Stop();                     // 2
+            _fakeLight.Received(1).TurnOff();               // 2
+
+        }
+
+        // Calling CookingIsDone()
+        //  --- Already unit tested ---
+        // Should be tested again with real units...
+        // Can at the moment only be tested with fakes.
+        [TestCase(TestName = "CookingIsDone StartCooking ShouldTurnOff")]
+        public void TestCookingIsDone()
+        {
+            _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
+
+            _PBtn.Press();
+            for (int i = 0; i < 10; ++i)
+            {
+                _TBtn.Press();
+            }
+            _SCBtn.Press(); 
+            
+            _sutUI.CookingIsDone(); // 1
+
+            // This test does not integrate anything
+            _fakeDisplay.Received(2).Clear();
+            _fakeLight.Received(1).TurnOff();
         }
     }
 }
