@@ -144,31 +144,6 @@ namespace Tests
         }
 
 
-        // ButtonTests:
-        // related to sut
-        [TestCase(3, TestName = "Powerbuttom ShouldIncrementPower")]
-        public void TestBtnPower(int result)
-        {
-            _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
-
-            var wasCalledCount = 0;
-            _PBtn.Pressed += (o, e) => wasCalledCount = ++wasCalledCount;
-            _TBtn.Pressed += (o, e) => wasCalledCount = ++wasCalledCount;
-            _SCBtn.Pressed += (o, e) => wasCalledCount = ++wasCalledCount;
-
-            _PBtn.Press();  // 1
-            _TBtn.Press();  // 2
-            _SCBtn.Press(); // 3
-
-
-//             _fakeDisplay.Received(1).ShowPower(Arg.Is<int>(50));                // 1 
-//             _fakeCC.Received(1).Stop();                                         // 3
-//             _fakeDisplay.Received(1).Clear();                                   // 4 
-//             _fakeLight.Received(1).TurnOn();                                    // 4
-            Assert.That(wasCalledCount, Is.EqualTo(result));
-        }
-
-
         [TestCase(2,100, TestName = "Powerbuttom Increment ShouldResultInPowerLevel(100)")]
         [TestCase(14, 700, TestName = "Powerbuttom Increment ShouldResultInPowerLevel(700)")]
         [TestCase(15, 50, TestName = "Powerbuttom Increment ShouldOverflow ToPowerLevel(50)")]
@@ -203,7 +178,7 @@ namespace Tests
 
         
         // StartCancelButtom Cancel Only
-        [TestCase(TestName = "StartCancelButtom OnPowerOn ShouldTurnOff")]
+        [TestCase(TestName = "StartCancelButtom OnPowerPressed ShouldTurnOff")]
         public void TestBtnCancel()
         {
             _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
