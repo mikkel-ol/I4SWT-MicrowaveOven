@@ -1,4 +1,4 @@
-@startuml
+@startuml IT03-Sut
 
 'Testing colors:
 skinparam card{
@@ -11,11 +11,6 @@ skinparam card{
 header SWT group 8
 title IT01 Sut 3
 
-frame Application{
-    card program
-}
-
-frame Core{
 '0.
     card Door<<tested>>
     card Button<<tested>>
@@ -34,10 +29,6 @@ frame Core{
 
 '4 
     card Output
-
-
-}
-Application -- Core
 
 'Relations projects
 ' 0. to 1.
