@@ -21,8 +21,8 @@ namespace Microwave.Test.Unit
         [Test]
         public void TurnOn_WasOff_CorrectOutput()
         {
-            uut.TurnOn(50);
-            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("50 %")));
+            uut.TurnOn(450);
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("PowerTube works with 450 watt")));
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void TurnOn_HighPower_ThrowsException()
         {
-            Assert.Throws<System.ArgumentOutOfRangeException>(() => uut.TurnOn(101));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => uut.TurnOn(701));
         }
 
         [Test]
