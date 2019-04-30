@@ -45,13 +45,12 @@ namespace Tests
             _sutCookCtrl = new CookController(_Timer, _fakeDisp, _fakePowerTube, _fakeUI);
         }
 
-        [TestCase(50, 30, TestName = "StartCooking ShouldCall PowerTubeTurnOn And TimerStart")]
+        [TestCase(50, 30, TestName = "StartCooking ShouldCall PowerTubeTurnOn")]
         public void TestStartCooking(int power, int time)
         {
             _sutCookCtrl.StartCooking(power, time);
 
             _fakePowerTube.Received(1).TurnOn(power);
-            _Timer.Received(1).Start(time);
         }
 
         [TestCase(50, 5, TestName = "OnTimerExpired ShouldCall PowerTubeTurnOff And UICookingIsDone")]
@@ -65,24 +64,22 @@ namespace Tests
             _fakeUI.Received(1).CookingIsDone();
         }
 
-        [TestCase(60, TestName = "OnTimerTick FakeTimeRemaining ShouldCall DisplayShowTime")]
-        public void TestOnTimerTick(int timeRemaining)
+        [TestCase(TestName = "OnTimerTick ShouldCall DisplayShowTime WithOneSecondLess")]
+        public void TestOnTimerTick()
         {
-            _Timer.TimeRemaining.Returns(timeRemaining);
+            // Arbitrary number - must be at least one second
+            var time = 60;
 
-            _sutCookCtrl.OnTimerTick(null, EventArgs.Empty);
+            var wait = new System.Threading.ManualResetEvent(false);
+            _Timer.TimerTick += (o, e) => wait.Set();
+            
+            _Timer.Start(time);
 
-            _fakeDisp.Received(1).ShowTime(timeRemaining/60, timeRemaining % 60);
-        }
+            // Wait until signal is set (1 sec)
+            wait.WaitOne();
 
-        [TestCase(60, TestName = "OnTimerTick ShouldCall DisplayShowTime WithOneSecondLess")]
-        public void TestOnTimerTickDisplayUpdate(int timeRemaining)
-        {
-            _Timer.TimeRemaining.Returns(timeRemaining);
-
-            _sutCookCtrl.OnTimerTick(null, EventArgs.Empty);
-
-            _fakeDisp.Received(1).ShowTime(timeRemaining / 60, timeRemaining % 60);
+            // Test that output to display is 1 second less than before
+            _fakeDisp.Received(1).ShowTime( (time-1) / 60, (time-1) % 60);        
         }
     }
 }
