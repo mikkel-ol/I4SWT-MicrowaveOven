@@ -73,6 +73,7 @@ namespace Tests
             var wait = new System.Threading.ManualResetEvent(false);
             _Timer.TimerTick += (o, e) => wait.Set();
             
+            // Start timer
             _Timer.Start(time);
 
             // Wait until signal is set (1 sec)
