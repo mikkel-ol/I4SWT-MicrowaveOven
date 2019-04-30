@@ -4,7 +4,7 @@
   <TargetArguments>bin\Debug\net45\Microwave.Test.Integration.dll --result:TestResult2.xml</TargetArguments>
   <TargetWorkingDir>tests\Microwave.Test.Integration</TargetWorkingDir>
   <TempDir><!-- Directory for the auxiliary files. Set to system temp by default. --></TempDir>
-  <Output>coverage_report.html</Output>
+  <Output>coverage_report_it.html</Output>
   <ReportType>HTML<!-- [HTML|JSON|XML|NDependXML]. A type of the report. XML by default. --></ReportType>
   <InheritConsole><!-- [True|False] Lets the application being analysed to inherit dotCover console. True by default. --> </InheritConsole>
   
