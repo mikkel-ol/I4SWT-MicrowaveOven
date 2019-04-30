@@ -12,18 +12,12 @@ namespace Tests
     public class It02Sut2
     {
         private IDisplay _fakeDisp;
-        private IOutput _fakeOut;
         private IPowerTube _fakePowerTube;
 
         // Double dependency
         private IUserInterface _fakeUI;
 
         private Timer _Timer;
-        private Button _PBtn;
-        private Button _TBtn;
-        private Button _SCBtn;
-        private Door _Door;
-        private Light _Light;
 
         private CookController _sutCookCtrl;
 
@@ -31,16 +25,10 @@ namespace Tests
         public void Setup()
         {
             _fakeDisp = Substitute.For<IDisplay>();
-            _fakeOut = Substitute.For<IOutput>();
             _fakePowerTube = Substitute.For<IPowerTube>();
             _fakeUI = Substitute.For<IUserInterface>();
 
             _Timer = new Timer();
-            _PBtn = new Button();
-            _TBtn = new Button();
-            _SCBtn = new Button();
-            _Door = new Door();
-            _Light = new Light(_fakeOut);
 
             _sutCookCtrl = new CookController(_Timer, _fakeDisp, _fakePowerTube, _fakeUI);
         }
@@ -51,6 +39,28 @@ namespace Tests
             _sutCookCtrl.StartCooking(power, time);
 
             _fakePowerTube.Received(1).TurnOn(power);
+        }
+
+        [TestCase(TestName = "StopCooking ShouldCall PowerTubeTurnOff And TimerStop")]
+        public void TestStopCooking()
+        {
+            // Arbitrary number - must be at least one second
+            var time = 60;
+
+            var wait = new System.Threading.ManualResetEvent(false);
+            _Timer.TimerTick += (o, e) => wait.Set();
+
+            // Start timer
+            _Timer.Start(time);
+
+            // Should stop timer
+            _sutCookCtrl.Stop();
+
+            // Should not be set if Timer is stopped
+            bool res = wait.WaitOne(TimeSpan.FromSeconds(2));
+
+            _fakePowerTube.Received(1).TurnOff();
+            Assert.IsFalse(res);
         }
 
         [TestCase(50, 5, TestName = "OnTimerExpired ShouldCall PowerTubeTurnOff And UICookingIsDone")]
