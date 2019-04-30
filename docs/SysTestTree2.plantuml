@@ -11,11 +11,6 @@ skinparam card {
 header SWT group 8
 title IT02 Sut
 
-frame Application {
-    card program
-}
-
-frame Core {
 '0.
     card Door<<tested>>
     card Button<<tested>>
@@ -52,8 +47,8 @@ UserInterface -[thickness=2]- CookController
 '1. to 3.
 'Door -[thickness=2]- CookController
 
-Timer -- CookController
-Timer -- CookController
+Timer -[thickness=2]- CookController
+Timer -[thickness=2]- CookController
 
 
 CookController -- PowerTube
@@ -69,7 +64,5 @@ CookController -- Display
 Light -- Output
 Display -- Output
 PowerTube -- Output
-
-
 
 @enduml

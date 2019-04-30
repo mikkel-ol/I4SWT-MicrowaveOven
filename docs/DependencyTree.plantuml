@@ -19,6 +19,7 @@ frame Core{
 '0.
     card Door
     card Button
+    card Timer
 
 '1.
     card UserInterface
@@ -28,7 +29,6 @@ frame Core{
     card Light
 
 '3.
-    card Timer
     card PowerTube
     card Display
 
@@ -55,6 +55,8 @@ UserInterface -- CookController
 '1. to 2.
 'Door - CookController
 
+Timer -- CookController 
+Timer -- CookController
 
 CookController -- PowerTube
 
@@ -62,9 +64,6 @@ CookController -- PowerTube
 UserInterface -- Display
 UserInterface -- Light
 CookController -- Display
-
-CookController -- Timer
-CookController -- Timer 
 
 
 ' Relations 2. to 3.
