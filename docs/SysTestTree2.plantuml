@@ -1,4 +1,4 @@
-@startuml
+@startuml IT02-Sut
 
 'Testing colors:
 skinparam card {
@@ -34,10 +34,6 @@ frame Core {
 
 '4 
     card Output
-
-
-}
-Application -- Core
 
 'Relations projects
 ' 0. to 1.
