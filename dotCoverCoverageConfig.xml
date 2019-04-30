@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AnalyseParams>
   <TargetExecutable>C:\Program Files (x86)\NUnit.org\nunit-console\nunit3-console.exe</TargetExecutable>
-  <TargetArguments>bin\Debug\net45\Microwave.Test.Unit.dll bin\Debug\net45\Microwave.Test.Integration.dll --result:TestResult1.xml</TargetArguments>
-  <TargetWorkingDir>tests\Microwave.Test.Unit</TargetWorkingDir>
+  <TargetArguments>bin\Debug\net45\Microwave.Test.Unit.dll bin\Debug\net45\Microwave.Test.Integration.dll --result:TestResult.xml</TargetArguments>
+  <TargetWorkingDir>tests\*</TargetWorkingDir>
   <TempDir><!-- Directory for the auxiliary files. Set to system temp by default. --></TempDir>
-  <Output>coverage_report_unit.html</Output>
+  <Output>coverage_report.html</Output>
   <ReportType>HTML<!-- [HTML|JSON|XML|NDependXML]. A type of the report. XML by default. --></ReportType>
   <InheritConsole><!-- [True|False] Lets the application being analysed to inherit dotCover console. True by default. --> </InheritConsole>
   
