@@ -1,11 +1,10 @@
-using System;
-using NUnit.Framework;
-using NSubstitute;
 using Microwave.Core.Boundary;
-using Microwave.Core.Interfaces;
 using Microwave.Core.Controllers;
+using Microwave.Core.Interfaces;
+using NSubstitute;
+using NUnit.Framework;
 
-namespace Tests
+namespace Microwave.Test.Integration
 {
     // System under test
     // Iteration 02, Light

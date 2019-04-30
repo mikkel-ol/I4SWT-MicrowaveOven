@@ -8,7 +8,7 @@ skinparam card{
 }
 
 header SWT group 8
-title IT01 Sut 1
+title IT01 Sut
 
 '0.
     card Door<<tested>>

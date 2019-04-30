@@ -1,15 +1,10 @@
-using System;
-using System.IO;
-using NUnit.Framework;
 using Microwave.Core.Boundary;
+using Microwave.Core.Controllers;
 using Microwave.Core.Interfaces;
 using NSubstitute;
-using Microwave.Core.Controllers;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Reflection;
+using NUnit.Framework;
 
-namespace Tests
+namespace Microwave.Test.Integration
 {
     public class It01Sut
     {
