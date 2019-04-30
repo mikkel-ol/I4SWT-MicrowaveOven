@@ -9,8 +9,8 @@ using Timer = Microwave.Core.Boundary.Timer;
 namespace Microwave.Test.Integration
 {
     // System under test
-    // Iteration 01
-    public class It03Sut2
+    // Iteration 03 Display
+    public class It03SutDisplay
     {
         private IOutput _fakeOutput;
 

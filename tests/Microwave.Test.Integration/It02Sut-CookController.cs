@@ -9,7 +9,7 @@ namespace Microwave.Test.Integration
 {
     // System under test
     // Iteration 02, Light
-    public class It02Sut2
+    public class It02SutCookController
     {
         private IDisplay _fakeDisp;
         private IPowerTube _fakePowerTube;
