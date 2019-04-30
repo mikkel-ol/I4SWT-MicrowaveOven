@@ -9,7 +9,7 @@ skinparam card{
 }
 
 header SWT group 8
-title IT01 Dependency
+title Dependency Tree
 
 frame Application{
     card program
@@ -53,7 +53,7 @@ Button -- UserInterface
 UserInterface -- CookController
 UserInterface -- CookController
 '1. to 2.
-Door - CookController
+'Door - CookController
 
 
 CookController -- PowerTube

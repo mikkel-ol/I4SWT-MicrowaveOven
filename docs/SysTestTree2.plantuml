@@ -50,7 +50,7 @@ UserInterface -[thickness=2]- CookController
 UserInterface -[thickness=2]- CookController
 
 '1. to 3.
-Door -[thickness=2]- CookController
+'Door -[thickness=2]- CookController
 
 
 CookController -- PowerTube

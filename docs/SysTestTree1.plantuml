@@ -45,7 +45,7 @@ Button -[thickness=2]- UserInterface
 UserInterface -- CookController
 UserInterface -- CookController
 '1. to 2.
-Door -- CookController
+'Door -- CookController
 
 
 CookController -- PowerTube
