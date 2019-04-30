@@ -107,13 +107,13 @@ namespace Microwave.Core.Controllers
                     myState = States.DOOROPEN;
                     break;
                 case States.SETPOWER:
-                    powerLevel = 50;
+                    //powerLevel = 50;
                     myLight.TurnOn();
                     myDisplay.Clear();
                     myState = States.DOOROPEN;
                     break;
                 case States.SETTIME:
-                    powerLevel = 50;
+                    //powerLevel = 50;
                     time = 1;
                     myLight.TurnOn();
                     myDisplay.Clear();
