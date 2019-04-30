@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using NUnit.Framework;
 using NSubstitute;
 using Microwave.Core.Boundary;
@@ -14,12 +13,12 @@ namespace Tests
     {
         private IDisplay _fakeDisp;
         private IOutput _fakeOut;
-        private ITimer _fakeTimer;
         private IPowerTube _fakePowerTube;
 
         // Double dependency
         private IUserInterface _fakeUI;
 
+        private Timer _Timer;
         private Button _PBtn;
         private Button _TBtn;
         private Button _SCBtn;
@@ -33,17 +32,17 @@ namespace Tests
         {
             _fakeDisp = Substitute.For<IDisplay>();
             _fakeOut = Substitute.For<IOutput>();
-            _fakeTimer = Substitute.For<ITimer>();
             _fakePowerTube = Substitute.For<IPowerTube>();
             _fakeUI = Substitute.For<IUserInterface>();
 
+            _Timer = new Timer();
             _PBtn = new Button();
             _TBtn = new Button();
             _SCBtn = new Button();
             _Door = new Door();
             _Light = new Light(_fakeOut);
 
-            _sutCookCtrl = new CookController(_fakeTimer, _fakeDisp, _fakePowerTube, _fakeUI);
+            _sutCookCtrl = new CookController(_Timer, _fakeDisp, _fakePowerTube, _fakeUI);
         }
 
         [TestCase(50, 30, TestName = "StartCooking ShouldCall PowerTubeTurnOn And TimerStart")]
@@ -52,7 +51,7 @@ namespace Tests
             _sutCookCtrl.StartCooking(power, time);
 
             _fakePowerTube.Received(1).TurnOn(power);
-            _fakeTimer.Received(1).Start(time);
+            _Timer.Received(1).Start(time);
         }
 
         [TestCase(50, 5, TestName = "OnTimerExpired ShouldCall PowerTubeTurnOff And UICookingIsDone")]
@@ -69,11 +68,21 @@ namespace Tests
         [TestCase(60, TestName = "OnTimerTick FakeTimeRemaining ShouldCall DisplayShowTime")]
         public void TestOnTimerTick(int timeRemaining)
         {
-            _fakeTimer.TimeRemaining.Returns(timeRemaining);
+            _Timer.TimeRemaining.Returns(timeRemaining);
 
             _sutCookCtrl.OnTimerTick(null, EventArgs.Empty);
 
             _fakeDisp.Received(1).ShowTime(timeRemaining/60, timeRemaining % 60);
+        }
+
+        [TestCase(60, TestName = "OnTimerTick ShouldCall DisplayShowTime WithOneSecondLess")]
+        public void TestOnTimerTickDisplayUpdate(int timeRemaining)
+        {
+            _Timer.TimeRemaining.Returns(timeRemaining);
+
+            _sutCookCtrl.OnTimerTick(null, EventArgs.Empty);
+
+            _fakeDisp.Received(1).ShowTime(timeRemaining / 60, timeRemaining % 60);
         }
     }
 }
