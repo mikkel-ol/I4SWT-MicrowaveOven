@@ -1,14 +1,21 @@
 @startuml IT02-Sut
 
 'Testing colors:
-skinparam card{
+skinparam card {
     backgroundColor<<tested>> lawngreen
     backgroundColor<<sut>> salmon
     backgroundColor<<test>> salmon
     backgroundColor<<fake>> gold
 }
 
+header SWT group 8
+title IT01 Sut 2
 
+frame Application {
+    card program
+}
+
+frame Core {
 '0.
     card Door<<tested>>
     card Button<<tested>>
@@ -51,7 +58,7 @@ CookController -- PowerTube
 '1. to 2.
 UserInterface -- Display
 UserInterface -[thickness=2]- Light
-CookController -[thickness=2]- Display
+CookController -- Display
 
 CookController -- Timer
 CookController -- Timer 

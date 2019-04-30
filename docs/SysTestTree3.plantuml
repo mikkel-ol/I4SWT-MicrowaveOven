@@ -8,6 +8,8 @@ skinparam card{
     backgroundColor<<fake>> gold
 }
 
+header SWT group 8
+title IT01 Sut 3
 
 '0.
     card Door<<tested>>
