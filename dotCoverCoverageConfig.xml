@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AnalyseParams>
   <TargetExecutable>C:\Program Files (x86)\NUnit.org\nunit-console\nunit3-console.exe</TargetExecutable>
-  <TargetArguments>bin\Debug\net45\Microwave.Test.Unit.dll --result:TestResult.xml</TargetArguments>
+  <TargetArguments>bin\Debug\net45\Microwave.Test.Unit.dll --result:TestResult1.xml</TargetArguments>
   <TargetWorkingDir>tests\Microwave.Test.Unit</TargetWorkingDir>
   <TempDir><!-- Directory for the auxiliary files. Set to system temp by default. --></TempDir>
   <Output>coverage_report.html</Output>
