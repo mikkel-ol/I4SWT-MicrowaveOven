@@ -19,7 +19,6 @@ namespace Tests
 
         // Double dependency
         private IUserInterface _fakeUI;
-        private UserInterface _UI;
 
         private Button _PBtn;
         private Button _TBtn;
@@ -45,8 +44,6 @@ namespace Tests
             _Light = new Light(_fakeOut);
 
             _sutCookCtrl = new CookController(_fakeTimer, _fakeDisp, _fakePowerTube, _fakeUI);
-
-            _UI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisp, _Light, _sutCookCtrl);
         }
 
         [TestCase(50, 30, TestName = "StartCooking ShouldCall PowerTubeTurnOn And TimerStart")]
