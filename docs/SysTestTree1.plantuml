@@ -1,5 +1,4 @@
-@startuml IT01-Sut
-
+@startuml
 'Testing colors:
 skinparam card{
     backgroundColor<<tested>> lawngreen
@@ -14,6 +13,7 @@ title IT01 Sut 1
 '0.
     card Door<<tested>>
     card Button<<tested>>
+    card Timer<<tested>>
 
 '1.
     card UserInterface<<sut>>
@@ -23,7 +23,6 @@ title IT01 Sut 1
     card Light
 
 '3.
-    card Timer
     card PowerTube
     card Display
 
@@ -39,14 +38,15 @@ Door -[thickness=2]- UserInterface
 Button -[thickness=2]- UserInterface
 Button -[thickness=2]- UserInterface
 
-
 'Relations CookController:
 '1.
 UserInterface -- CookController
 UserInterface -- CookController
-'1. to 2.
+'1. to 3.
 'Door -- CookController
 
+Timer -- CookController
+Timer -- CookController
 
 CookController -- PowerTube
 
@@ -55,15 +55,9 @@ UserInterface -- Display
 UserInterface -- Light
 CookController -- Display
 
-CookController -- Timer
-CookController -- Timer 
-
 
 ' Relations 2. to 3.
 Light -- Output
 Display -- Output
 PowerTube -- Output
-
-
-
 @enduml

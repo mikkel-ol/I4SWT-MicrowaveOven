@@ -14,6 +14,7 @@ title IT01 Sut 3
 '0.
     card Door<<tested>>
     card Button<<tested>>
+    card Timer<<tested>>
 
 '1.
     card UserInterface<<tested>>
@@ -23,7 +24,6 @@ title IT01 Sut 3
     card Light<<tested>>
 
 '3.
-    card Timer<<sut>>
     card PowerTube<<sut>>
     card Display<<sut>>
 
@@ -43,9 +43,11 @@ Button -- UserInterface
 '1.
 UserInterface -- CookController
 UserInterface -- CookController
-'1. to 2.
+'1. to 3.
 'Door - CookController
 
+Timer -- CookController 
+Timer -- CookController 
 
 CookController -[thickness=2]- PowerTube
 
@@ -53,9 +55,6 @@ CookController -[thickness=2]- PowerTube
 UserInterface -[thickness=2]- Display
 UserInterface -- Light
 CookController -[thickness=2]- Display
-
-CookController -[thickness=2]- Timer
-CookController -[thickness=2]- Timer 
 
 
 ' Relations 2. to 3.
