@@ -37,8 +37,8 @@ namespace Microwave.Test.Integration
 
         }
 
-        // OnDoorOpen Tests
-        // From all states to States.DOOROPEN
+        // Door input
+        // output asserted
         [TestCase(1, TestName = "OpenDoor StateREADY ShouldCall_fakeLight(1)")]
         public void TestDoorLight(int result)
         {
@@ -53,7 +53,8 @@ namespace Microwave.Test.Integration
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
 
-        
+        // Door input
+        // output asserted
         [TestCase(2, TestName = "OpenDoor StateSETPOWER ShouldCall_fakeLight(1)_fakeDisplay(1)")]
         public void TestDoorPowerLight(int result)
         {
@@ -71,6 +72,8 @@ namespace Microwave.Test.Integration
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
 
+        // Door input
+        // output asserted
         [TestCase(3, TestName = "OpenDoor StateSETTIME ShouldCall_fakeLight(1)_fakeDisplay(3)")]
         public void TestDoorPowerLightTime(int result)
         {
@@ -93,6 +96,8 @@ namespace Microwave.Test.Integration
             Assert.That(wasCalledCount, Is.EqualTo(result));
         }
 
+        // Door input
+        // output asserted
         [TestCase(4, TestName = "OpenDoor StateCOOKING ShouldCall_fakeLight(1)_fakeDisplay(3)")]
         public void TestDoorStart(int result)
         {
@@ -139,6 +144,9 @@ namespace Microwave.Test.Integration
         }
 
 
+
+        // btn input
+        // output asserted
         [TestCase(2,100, TestName = "Powerbuttom Increment ShouldResultInPowerLevel(100)")]
         [TestCase(14, 700, TestName = "Powerbuttom Increment ShouldResultInPowerLevel(700)")]
         [TestCase(15, 50, TestName = "Powerbuttom Increment ShouldOverflow ToPowerLevel(50)")]
@@ -156,6 +164,8 @@ namespace Microwave.Test.Integration
         }
 
 
+        // btn input
+        // output asserted
         [TestCase(1, 1, TestName = "Timebuttom Increment ShouldResultInTimeMin(1)")]
         [TestCase(61, 61, TestName = "Timebuttom Increment ShouldResultInTimeMin(13)")]
         public void TestBtnTimeLoop(int loop, int resultMin)
@@ -171,7 +181,9 @@ namespace Microwave.Test.Integration
             _fakeDisplay.ShowTime(Arg.Is<int>(resultMin), Arg.Is<int>(0));  // 1
         }
 
-        
+
+        // btn input
+        // output asserted
         // StartCancelButtom Cancel Only
         [TestCase(TestName = "StartCancelButtom OnPowerPressed ShouldTurnOff")]
         public void TestBtnCancel()
@@ -185,7 +197,9 @@ namespace Microwave.Test.Integration
             _fakeDisplay.Received(1).Clear();
         }
 
-        
+
+        // btn input
+        // output asserted
         // StartCancelButtom
         [TestCase(TestName = "StartCancelButtom CookingAndCancel ShouldStopCooking")]
         public void TestBtnStartCancel()
@@ -203,34 +217,12 @@ namespace Microwave.Test.Integration
 
             _fakeDisplay.Received(2).Clear();               // 1 , 2
             _fakeLight.Received(1).TurnOn();                // 1
-            _fakeCC.Received(1).StartCooking(50, 10 * 60);  // 1
 
+            // Assert that cookcontroller stops
+            _fakeCC.Received(1).StartCooking(Arg.Is<int>(50), Arg.Is<int>(10 * 60));  // 1
             _fakeCC.Received(1).Stop();                     // 2
             _fakeLight.Received(1).TurnOff();               // 2
 
-        }
-
-        // Calling CookingIsDone()
-        //  --- Already unit tested ---
-        // Should be tested again with real units...
-        // Can at the moment only be tested with fakes.
-        [TestCase(TestName = "CookingIsDone StartCooking ShouldTurnOff")]
-        public void TestCookingIsDone()
-        {
-            _sutUI = new UserInterface(_PBtn, _TBtn, _SCBtn, _Door, _fakeDisplay, _fakeLight, _fakeCC);
-
-            _PBtn.Press();
-            for (int i = 0; i < 10; ++i)
-            {
-                _TBtn.Press();
-            }
-            _SCBtn.Press(); 
-            
-            _sutUI.CookingIsDone(); // 1
-
-            // This test does not integrate anything
-            _fakeDisplay.Received(2).Clear();
-            _fakeLight.Received(1).TurnOff();
         }
     }
 }
