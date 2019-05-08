@@ -1,14 +1,12 @@
-@startuml
+@startuml sut03
+
 'Testing colors:
 skinparam card{
     backgroundColor<<tested>> lawngreen
-    backgroundColor<<sut>> salmon
+    backgroundColor<<under-test>> salmon
     backgroundColor<<test>> salmon
     backgroundColor<<fake>> gold
 }
-
-header SWT group 8
-title IT01 Sut
 
 '0.
     card Door<<tested>>
@@ -16,39 +14,41 @@ title IT01 Sut
     card Timer<<tested>>
 
 '1.
-    card UserInterface<<sut>>
+    card UserInterface<<tested>>
 
 '2.
-    card CookController
-    card Light
+    card Light<<tested>>
+frame sut04{
+    card CookController<<tested>>
 
 '3.
-    card PowerTube
+    card PowerTube<<under-test>>
+}
     card Display
 
 '4 
     card Output
 
-
 'Relations projects
 ' 0. to 1.
-Door -[thickness=2]- UserInterface
-Door -[thickness=2]- UserInterface
+Door -- UserInterface
+Door -- UserInterface
 
-Button -[thickness=2]- UserInterface
-Button -[thickness=2]- UserInterface
+Button -- UserInterface
+Button -- UserInterface
+
 
 'Relations CookController:
 '1.
 UserInterface -- CookController
 UserInterface -- CookController
 '1. to 3.
-'Door -- CookController
+'Door - CookController
 
-Timer -- CookController
-Timer -- CookController
+Timer -- CookController 
+Timer -- CookController 
 
-CookController -- PowerTube
+CookController -[thickness=3]- PowerTube
 
 '1. to 2.
 UserInterface -- Display
@@ -60,4 +60,7 @@ CookController -- Display
 Light -- Output
 Display -- Output
 PowerTube -- Output
+
+
+
 @enduml

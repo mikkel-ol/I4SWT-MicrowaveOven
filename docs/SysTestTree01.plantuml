@@ -1,0 +1,62 @@
+@startuml sut01
+'Testing colors:
+skinparam card{
+    backgroundColor<<tested>> lawngreen
+    backgroundColor<<under-test>> salmon
+    backgroundColor<<test>> salmon
+    backgroundColor<<fake>> gold
+}
+
+'0.
+    card Timer<<tested>>
+
+frame sut01{
+    card Door<<tested>>
+    card Button<<tested>>
+
+'1.
+    card UserInterface<<under-test>>
+}
+'2.
+    card CookController
+    card Light
+
+'3.
+    card PowerTube
+    card Display
+
+'4 
+    card Output
+
+
+'Relations projects
+' 0. to 1.
+Door -[thickness=3]- UserInterface
+Door -[thickness=3]- UserInterface
+
+Button -[thickness=3]- UserInterface
+Button -[thickness=3]- UserInterface
+
+'Relations CookController:
+'1.
+UserInterface -- CookController
+UserInterface -- CookController
+'1. to 3.
+'Door -- CookController
+
+Timer -- CookController
+Timer -- CookController
+
+CookController -- PowerTube
+
+'1. to 2.
+UserInterface -- Display
+UserInterface -- Light
+CookController -- Display
+
+
+' Relations 2. to 3.
+Light -- Output
+Display -- Output
+PowerTube -- Output
+@enduml
