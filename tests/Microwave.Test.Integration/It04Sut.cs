@@ -9,7 +9,7 @@ namespace Microwave.Test.Integration
     // System under test
     // Iteration 03
     // Mainly PowerTube
-    public class It03SutPowerTube
+    public class It04Sut
     {
 
         private IDisplay _fakeDisp;

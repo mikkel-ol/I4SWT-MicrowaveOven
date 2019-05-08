@@ -10,7 +10,7 @@ namespace Microwave.Test.Integration
 {
     // System under test
     // Iteration 03 Display
-    public class It03SutDisplay
+    public class It05Sut
     {
         private IOutput _fakeOutput;
 

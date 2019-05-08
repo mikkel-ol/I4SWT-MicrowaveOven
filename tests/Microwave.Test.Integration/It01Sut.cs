@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Microwave.Test.Integration
 {
-    public class It01SutUserInterface
+    public class It01Sut
     {
         private ICookController _fakeCC;
         private IDisplay _fakeDisplay;
