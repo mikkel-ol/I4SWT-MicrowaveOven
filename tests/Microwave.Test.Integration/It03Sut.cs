@@ -8,89 +8,163 @@ using NUnit.Framework;
 namespace Microwave.Test.Integration
 {
     // System under test
-    // Iteration 02, Light
+    // Iteration 03
     public class It03Sut
     {
+        private IDoor _door;
+        private IButton _powerButton;
+        private IButton _timerButton;
+        private IButton _startCancelButton;
+        private ITimer _timer;
+        private ILight _light;
+
+        private UserInterface _ui;
+        private CookController _cookCtrl;
+
         private IDisplay _fakeDisp;
         private IPowerTube _fakePowerTube;
-
-        // Double dependency
-        private IUserInterface _fakeUI;
-
-        private Timer _Timer;
-
-        private CookController _sutCookCtrl;
+        private IOutput _fakeOutput;
 
         [SetUp]
         public void Setup()
         {
+            _door = new Door();
+            _powerButton = new Button();
+            _timerButton = new Button();
+            _startCancelButton = new Button();
+
+            _timer = new Timer();
+
             _fakeDisp = Substitute.For<IDisplay>();
             _fakePowerTube = Substitute.For<IPowerTube>();
-            _fakeUI = Substitute.For<IUserInterface>();
+            _fakeOutput = Substitute.For<IOutput>();
 
-            _Timer = new Timer();
+            _light = new Light(_fakeOutput);
 
-            _sutCookCtrl = new CookController(_Timer, _fakeDisp, _fakePowerTube, _fakeUI);
+            _cookCtrl = new CookController(_timer, _fakeDisp, _fakePowerTube);
+
+            _ui = new UserInterface(_powerButton, _timerButton, _startCancelButton, _door, _fakeDisp, _light, _cookCtrl);
+
+            // Double dependency
+            _cookCtrl.UI = _ui;
         }
 
-        [TestCase(50, 30, TestName = "StartCooking ShouldCall PowerTubeTurnOn")]
-        public void TestStartCooking(int power, int time)
+        [TestCase(TestName = "Timer Expired EventFired")]
+        public void TestTimerExpired()
         {
-            _sutCookCtrl.StartCooking(power, time);
-
-            _fakePowerTube.Received(1).TurnOn(power);
-        }
-
-        [TestCase(TestName = "StopCooking ShouldCall PowerTubeTurnOff And TimerStop")]
-        public void TestStopCooking()
-        {
-            // Arbitrary number - must be at least one second
-            var time = 60;
-
             var wait = new System.Threading.ManualResetEvent(false);
-            _Timer.TimerTick += (o, e) => wait.Set();
+            EventArgs e = null;
 
-            // Start timer
-            _Timer.Start(time);
+            _timer.Expired += 
+                (o, args) => 
+                {
+                    e = args;
+                    wait.Set();
+                };
 
-            // Should stop timer
-            _sutCookCtrl.Stop();
+            _timer.Start(1);
 
-            // Should not be set if Timer is stopped
-            bool res = wait.WaitOne(TimeSpan.FromSeconds(2));
-
-            _fakePowerTube.Received(1).TurnOff();
-            Assert.IsFalse(res);
-        }
-
-        [TestCase(50, 5, TestName = "OnTimerExpired ShouldCall PowerTubeTurnOff And UICookingIsDone")]
-        public void TestOnTimerExpired(int power, int time)
-        {
-            _sutCookCtrl.StartCooking(power, time); // Set isCooking = true
-
-            _sutCookCtrl.OnTimerExpired(null, EventArgs.Empty);
-
-            _fakePowerTube.Received(1).TurnOff();
-            _fakeUI.Received(1).CookingIsDone();
-        }
-
-        [TestCase(TestName = "OnTimerTick ShouldCall DisplayShowTime WithOneSecondLess")]
-        public void TestOnTimerTick()
-        {
-            // Arbitrary number - must be at least one second
-            var time = 60;
-
-            var wait = new System.Threading.ManualResetEvent(false);
-            _Timer.TimerTick += (o, e) => wait.Set();
+            wait.WaitOne();
             
-            // Start timer
-            _Timer.Start(time);
+            Assert.That(e, Is.Not.Null);
+        }
 
-            // Wait until signal is set (1 sec)
+        [TestCase(TestName = "Timer Tick EventFired")]
+        public void TestTimerTick()
+        {
+            var wait = new System.Threading.ManualResetEvent(false);
+            EventArgs e = null;
+
+            _timer.TimerTick +=
+                (o, args) =>
+                {
+                    e = args;
+                    wait.Set();
+                };
+
+            _timer.Start(2);
+
             wait.WaitOne();
 
-            // Test that output to display is 1 second less than before
-            _fakeDisp.Received(1).ShowTime( (time-1) / 60, (time-1) % 60);        
+            Assert.That(e, Is.Not.Null);
+        }
+
+        [TestCase(TestName = "CookController TimerExpired")]
+        public void TestOnTimerExpired()
+        {
+            // New buttons to get new callbacks
+            _powerButton = new Button();
+            _timerButton = new Button();
+            _startCancelButton = new Button();
+
+            // Fake timer to test dependency that way
+            _timer = Substitute.For<ITimer>();
+            _cookCtrl = new CookController(_timer, _fakeDisp, _fakePowerTube);
+            _ui = new UserInterface(_powerButton, _timerButton, _startCancelButton, _door, _fakeDisp, _light, _cookCtrl);
+
+            _timer.Expired += Raise.Event();
+
+            _powerButton.Press();
+            _timerButton.Press();
+            _startCancelButton.Press();
+
+            _fakeDisp.Received(1).Clear();
+            _fakeOutput.Received(1).OutputLine(Arg.Any<string>());
+        }
+
+        [TestCase(TestName = "CookController TimerTick")]
+        public void TestOnTimerTick()
+        {
+            // New buttons to get new callbacks
+            _powerButton = new Button();
+            _timerButton = new Button();
+            _startCancelButton = new Button();
+
+            // Fake timer to test dependency that way
+            _timer = Substitute.For<ITimer>();
+            _cookCtrl = new CookController(_timer, _fakeDisp, _fakePowerTube);
+            _ui = new UserInterface(_powerButton, _timerButton, _startCancelButton, _door, _fakeDisp, _light, _cookCtrl);
+
+            _timer.TimerTick += Raise.Event();
+
+            _powerButton.Press();
+            _timerButton.Press();
+            _startCancelButton.Press();
+
+            _fakeDisp.Received(1).Clear();
+            _fakeOutput.Received(1).OutputLine(Arg.Any<string>());
+        }
+
+        [TestCase(TestName = "StartButton Starts PowerTube")]
+        public void TestUserInterfaceStartPowertube()
+        {
+            _powerButton.Press();
+            _timerButton.Press();
+            _startCancelButton.Press();
+
+            _fakePowerTube.Received(1).TurnOn(50);
+        }
+
+        [TestCase(TestName = "StopButton Stops PowerTube")]
+        public void TestUserInterfaceStopPowertube()
+        {
+            _powerButton.Press();
+            _timerButton.Press();
+            _startCancelButton.Press();
+            _startCancelButton.Press();
+
+            _fakePowerTube.Received(1).TurnOff();
+        }
+
+        [TestCase(TestName = "OpenDoor Stops PowerTube")]
+        public void TestUserInterfaceOpenDoorStopPowertube()
+        {
+            _powerButton.Press();
+            _timerButton.Press();
+            _startCancelButton.Press();
+            _door.Open();
+
+            _fakePowerTube.Received(1).TurnOff();
         }
     }
 }
