@@ -1,4 +1,4 @@
-@startuml sut03
+@startuml sut04
 
 'Testing colors:
 skinparam card{
