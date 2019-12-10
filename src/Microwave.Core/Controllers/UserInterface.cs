@@ -82,7 +82,6 @@ namespace Microwave.Core.Controllers
                     myState = States.READY;
                     break;
                 case States.SETTIME:
-                    myDisplay.Clear();
                     myLight.TurnOn();
                     myCooker.StartCooking(powerLevel, time*60);
                     myState = States.COOKING;
@@ -146,8 +145,8 @@ namespace Microwave.Core.Controllers
                 case States.COOKING:
                     powerLevel = 50;
                     time = 1;
-                    myDisplay.Clear();
                     myLight.TurnOff();
+                    myDisplay.Clear();
                     // Beep 3 times
                     myState = States.READY;
                     break;
